@@ -1,5 +1,6 @@
 # Deep-FinGAF
-
+[![Python application](https://github.com/iSab01/deep-FinGAF/actions/workflows/python-app.yml/badge.svg)](https://github.com/iSab01/deep-FinGAF/actions/workflows/python-app.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## OnBoarding
 
 ### Transform tabular data to Gramian Angular Fields (GAF)
