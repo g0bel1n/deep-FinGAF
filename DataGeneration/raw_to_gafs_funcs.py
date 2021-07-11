@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from pandas.tseries.holiday import USFederalHolidayCalendar as Calendar
-from data.GramianAngularField import fit_transform
+from GramianAngularField import fit_transform
 
 
 def clean_non_trading_times(df: pd.DataFrame) -> pd.DataFrame:
