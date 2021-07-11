@@ -28,7 +28,7 @@ def trading_action(future_close: float, current_close: float) -> str:
 
 Then you only need to run the following commands :
 ````python
-from data.raw_to_gafs_funcs import clean_non_trading_times, set_gaf_data, convert_to_gaf_and_save
+from DataGeneration.raw_to_gafs_funcs import clean_non_trading_times, set_gaf_data, convert_to_gaf_and_save
 
 your_stock = clean_non_trading_times(your_stock)
 decision_map = set_gaf_data(your_stock)
@@ -38,7 +38,72 @@ convert_to_gaf_and_save(decision_map)
 In your deep_FinGAF/data folder you shall get two directories, 
 SHORT and LONG containing images containing each day information.
 
-##Ressources :   
+## More on GAF
+
+Images are normalized to [-1,1] then converted to polar coordinates.
+(*r.cos(phi) where phi = arcos(x)) and r is normalized time_stamp*)
+
+With the polar vector, we build a Gramian Matrix. This matrix is then
+processed into a heatmap and **that's your encoded image**.
+
+Some examples :
+
+Example 1 :
+<div id="banner">
+<div class="inline-block">
+
+![plot](./ressources/SwedishLeaf_example_encoded_32.png)
+
+</div>
+
+<div class="inline-block">
+</div>
+
+<div class="inline-block">
+
+![plot](./ressources/SwedishLeaf_example_plot_32.png)
+
+</div>
+</div>
+Example 2: 
+<div id="banner">
+<div class="inline-block">
+
+
+![plot](./ressources/SwedishLeaf_example_encoded_14.png)
+
+</div>
+
+<div class="inline-block">
+</div>
+
+<div class="inline-block">
+
+![plot](./ressources/SwedishLeaf_example_plot_14.png)
+
+</div>
+</div>
+
+Example 3: 
+<div id="banner">
+<div class="inline-block">
+
+
+![plot](./ressources/SwedishLeaf_example_encoded_18.png)
+
+</div>
+
+<div class="inline-block">
+</div>
+
+<div class="inline-block">
+
+![plot](./ressources/SwedishLeaf_example_plot_18.png)
+
+</div>
+</div> 
+
+## Ressources :   
 
 *Zhiguang Wang and Tim Oates*: 
 [Time-Series Image Encoding](https://www.aaai.org/ocs/index.php/WS/AAAIW15/paper/viewFile/10179/10251)
