@@ -47,61 +47,11 @@ With the polar vector, we build a Gramian Matrix. This matrix is then
 processed into a heatmap and **that's your encoded image**.
 
 Some examples :
-
-Example 1 :
-<div id="banner">
-<div class="inline-block">
-
-![plot](./ressources/SwedishLeaf_example_encoded_32.png)
-
-</div>
-
-<div class="inline-block">
-</div>
-
-<div class="inline-block">
-
-![plot](./ressources/SwedishLeaf_example_plot_32.png)
-
-</div>
-</div>
-Example 2: 
-<div id="banner">
-<div class="inline-block">
-
-
-![plot](./ressources/SwedishLeaf_example_encoded_14.png)
-
-</div>
-
-<div class="inline-block">
-</div>
-
-<div class="inline-block">
-
-![plot](./ressources/SwedishLeaf_example_plot_14.png)
-
-</div>
-</div>
-
-Example 3: 
-<div id="banner">
-<div class="inline-block">
-
-
-![plot](./ressources/SwedishLeaf_example_encoded_18.png)
-
-</div>
-
-<div class="inline-block">
-</div>
-
-<div class="inline-block">
-
-![plot](./ressources/SwedishLeaf_example_plot_18.png)
-
-</div>
-</div> 
+Real plot             |  Encoded image
+:-------------------------:|:-------------------------:
+![plot](./ressources/SwedishLeaf_example_plot_32.png)|![plot](./ressources/SwedishLeaf_example_encoded_32.png) 
+![plot](./ressources/SwedishLeaf_example_plot_14.png)|![plot](./ressources/SwedishLeaf_example_encoded_14.png) 
+![plot](./ressources/SwedishLeaf_example_plot_18.png)|![plot](./ressources/SwedishLeaf_example_encoded_18.png) 
 
 ## Ressources :   
 
