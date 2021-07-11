@@ -2,9 +2,9 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
+from PIL import Image
 from pandas.tseries.holiday import USFederalHolidayCalendar as Calendar
-from GramianAngularField import fit_transform
+from DataGeneration.GramianAngularField import fit_transform
 
 
 def clean_non_trading_times(df: pd.DataFrame) -> pd.DataFrame:
@@ -36,6 +36,26 @@ def trading_action(future_close: float, current_close: float) -> str:
         decision = 'SHORT'
     return decision
 
+def rgba2rgb( rgba, background=(0,0,0) ):
+    row, col, ch = rgba.shape
+
+    if ch == 3:
+        return rgba
+
+    assert ch == 4, 'RGBA image has 4 channels.'
+
+    rgb = np.zeros( (row, col, 3), dtype='float32' )
+    r, g, b, a = rgba[:,:,0], rgba[:,:,1], rgba[:,:,2], rgba[:,:,3]
+
+    a = np.asarray( a, dtype='float32' ) / 255.0
+
+    R, G, B = background
+
+    rgb[:,:,0] = r * a + (1.0 - a) * R
+    rgb[:,:,1] = g * a + (1.0 - a) * G
+    rgb[:,:,2] = b * a + (1.0 - a) * B
+
+    return np.asarray( rgb, dtype='uint8' )
 
 def set_gaf_data(df):
     """
@@ -79,5 +99,5 @@ def convert_to_gaf_and_save(decision_map: dict):
             img = np.zeros((40, 40))
             for i in range(len(day[1])):
                 img[slots[i][0][0]:slots[i][0][1], slots[i][1][0]:slots[i][1][1]] = fit_transform(day[1][i])
-            plt.pcolormesh(img, cmap='RdBu')
-            plt.savefig(decision + "/{}.png".format(index))
+            plt.pcolormesh(img, cmap='turbo')
+            plt.savefig(decision + "/{}.png".format(index), bbox_inches='tight', pad_inches=0)
