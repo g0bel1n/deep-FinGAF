@@ -1,6 +1,6 @@
 import torch
 from models import CNN
-
+"""
 def test_model(model_path: str):
     model =CNN()
     model.load_state_dict(torch.load(model_path))
@@ -15,3 +15,5 @@ def test_model(model_path: str):
             test_preds.append(preds)
 
     print(test_preds)
+    
+"""
