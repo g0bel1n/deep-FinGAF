@@ -4,7 +4,8 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 from pandas.tseries.holiday import USFederalHolidayCalendar as Calendar
-from DataGeneration.GramianAngularField import fit_transform
+from GramianAngularField import fit_transform
+from random import shuffle
 
 
 def clean_non_trading_times(df: pd.DataFrame) -> pd.DataFrame:
@@ -85,13 +86,25 @@ def set_gaf_data(df):
         decision = trading_action(future_close=future_value, current_close=current_value)
         decision_map[decision].append([list_dates[index - 1], gafs])
         index += 1
-    return decision_map
+    return decision_map, len(list_dates)
 
 
-def convert_to_gaf_and_save(decision_map: dict):
-    os.makedirs("SHORT", exist_ok=True)
-    os.makedirs("LONG", exist_ok=True)
+def convert_to_gaf_and_save(decision_map: dict, n: int, test_split):
+    #plt.rcParams["figure.figsize"] = (1, 1)
+    fig = plt.figure(frameon=False)
+    fig.set_size_inches(1, 1)
+    ax = fig.add_subplot(1, 1, 1)
 
+    indexs = [i for i in range(n)]
+    shuffle(indexs)
+    ind_split = int(len(indexs) * test_split)
+    test_list =  indexs[:ind_split]
+
+    ind = 0
+    os.makedirs("../data/TRAIN", exist_ok=True)
+    os.makedirs("../data/TEST", exist_ok=True)
+    f1 = open('../data/TRAIN/labels.txt', 'w')
+    f2 = open('../data/TEST/labels.txt', 'w')
     slots = [[(0, 20), (0, 20)], [(0, 20), (20, 40)], [(20, 40), (0, 20)], [(20, 40), (20, 40)]]
     for decision in decision_map:
         for day in decision_map[decision]:
@@ -99,5 +112,17 @@ def convert_to_gaf_and_save(decision_map: dict):
             img = np.zeros((40, 40))
             for i in range(len(day[1])):
                 img[slots[i][0][0]:slots[i][0][1], slots[i][1][0]:slots[i][1][1]] = fit_transform(day[1][i])
+            extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+
             plt.pcolormesh(img, cmap='turbo')
-            plt.savefig(decision + "/{}.png".format(index), bbox_inches='tight', pad_inches=0)
+            #plt.imshow(img, aspect='auto')
+            if ind in test_list:
+                save_path = "../data/TEST/{}.jpg".format(index)
+                f2.write(index + ";" + decision + "\n")
+            else :
+                save_path = "../data/TRAIN/{}.jpg".format(index)
+                f1.write(index + ";" + decision + "\n")
+            ind+=1
+            fig.savefig(save_path, dpi= 344,bbox_inches = extent)
+    f1.close()
+    f2.close()
