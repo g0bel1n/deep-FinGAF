@@ -38,6 +38,19 @@ convert_to_gaf_and_save(decision_map)
 In your deep_FinGAF/data folder you shall get two directories, 
 SHORT and LONG containing images containing each day information.
 
+#### Train and test a model
+
+Pretty easily done : 
+
+````python
+from model.models import CNN
+from model.train import train, test_model
+
+cnn = CNN()
+train(cnn, 50)
+test_model("../saved_model/cnn")
+
+````
 ## More on GAF
 
 Images are normalized to [-1,1] then converted to polar coordinates.
