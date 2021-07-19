@@ -9,7 +9,7 @@ from tqdm import tqdm
 import torch.optim as optim
 
 
-def train(model, epochs=10):
+def train(model, epochs=20):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters())
     dataset = ImageDataset("data/TRAIN/labels.txt", "data/TRAIN")
@@ -26,10 +26,10 @@ def train(model, epochs=10):
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-
+            if running_loss < 10e-4 :  break
             # print statistics
             running_loss += loss.item()
-            if i % 20 == 19:  # print every 2000 mini-batches
+            if i % 20 == 19:  # print every 20 mini-batches
                 print('[%d, %5d] loss: %.3f' %
                       (epoch + 1, i + 1, running_loss / 20))
                 running_loss = 0.
@@ -47,4 +47,4 @@ if __name__ == "__main__":
 
     cnn = CNN()
 
-    train(cnn)
+    train(cnn, 50)

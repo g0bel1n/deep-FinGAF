@@ -115,7 +115,6 @@ def convert_to_gaf_and_save(decision_map: dict, n: int, test_split):
             extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
 
             plt.pcolormesh(img, cmap='turbo')
-            #plt.imshow(img, aspect='auto')
             if ind in test_list:
                 save_path = "../data/TEST/{}.jpg".format(index)
                 f2.write(index + ";" + decision + "\n")

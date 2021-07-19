@@ -18,7 +18,7 @@ def generate(stock: str, start: str, end: str):
 
 if __name__=="__main__":
     stock = "GOOGL"
-    start="2020-08-01"
-    end = "2020-10-01"
+    start="2020-07-01"
+    end = "2021-06-01"
 
     generate(stock,start,end)
