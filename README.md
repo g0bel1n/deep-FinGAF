@@ -69,4 +69,4 @@ Real plot             |  Encoded image
 ## Ressources :   
 
 *Zhiguang Wang and Tim Oates*: 
-[Time-Series Image Encoding](https://www.aaai.org/ocs/index.php/WS/AAAIW15/paper/viewFile/10179/10251)
+[Time-Series Image Encoding](https://www.ijcai.org/Proceedings/15/Papers/553.pdf)
